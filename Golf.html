@@ -76,11 +76,6 @@
         .reset-btn:hover {
             background: #45a049;
         }
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            70% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
 
         /* Add transitions for ball and hole */
         ball {
@@ -133,6 +128,46 @@
         }
         .back-button:hover {
             background: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            .controls {
+                width: 90%;
+                left: 5%;
+                top: 10px;
+                padding: 10px;
+            }
+            .distance-display, .final-distance, .congrats-message, .try-again-message {
+                font-size: 10px;
+                padding: 10px;
+            }
+            .reset-btn, .back-button {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+            .controls {
+                width: 100%;
+                left: 0;
+                top: 5px;
+                padding: 5px;
+            }
+            .distance-display, .final-distance, .congrats-message, .try-again-message {
+                font-size: 8px;
+                padding: 5px;
+            }
+            .reset-btn, .back-button {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
