@@ -262,7 +262,7 @@
         const timeStep = 0.02; // Time increment per frame (s)  
         let ball = {
             x: canvas.width - 100 - (100 * getScale()),
-            y: canvas.height - 50, // Lower the ball position
+            y: canvas.height - 70, // Lower the ball position
             radius: .05 * getScale() * 100, // Make the ball smaller
             v0: 50, // Initial speed (m/s)
             angle: Math.PI / 4, // 45-degree launch angle
@@ -276,7 +276,7 @@
 
         const hole = {
             x: canvas.width - 150, // Align the hole horizontally with the ball
-            y: canvas.height - 110, // Align the hole horizontally with the ball
+            y: canvas.height - 130, // Lower the hole position
             radius: .07 * getScale() * 100, // Make the hole smaller
             flagHeight: 0.25 * getScale() * 100, // Make the flag smaller
             flagWidth: 0.05 * getScale() * 100 // Make the flag smaller
@@ -296,7 +296,7 @@
 
         function resetBall() {
             ball.x = hole.x - (25 * getScale());
-            ball.y = groundLevel; // Fix the ball position
+            ball.y = groundLevel - 20; // Lower the ball position
             ball.vx = 0;
             ball.vy = 0;
             ball.isMoving = false;
@@ -516,7 +516,7 @@
             document.getElementById('distanceValue').textContent = distance;
             if (!ball.isMoving && !ball.hasLanded) {
                 ball.x = hole.x - (distance * getScale());
-                ball.y = groundLevel; // Fix the ball position
+                ball.y = groundLevel - 20; // Lower the ball position
                 initialDistance = distance;
                 document.getElementById('currentDistance').textContent = '0.0';
                 updateCameraZoom();
@@ -533,7 +533,7 @@
             // Recalculate the positions of the ball and hole based on the new canvas size
             const scale = getScale();
             hole.x = canvas.width - 150 * scale; // Adjust hole position based on new scale
-            hole.y = groundLevel; // Keep the hole at ground level
+            hole.y = groundLevel - 20; // Lower the hole position
             
             ball.radius = 0.05 * scale * 100; // Make the ball smaller
             hole.radius = 0.07 * scale * 100; // Make the hole smaller
@@ -542,7 +542,7 @@
 
             if (!ball.isMoving && !ball.isDragging && !ball.hasLanded) {
                 ball.x = hole.x - (100 * scale);
-                ball.y = groundLevel; // Fix the ball position
+                ball.y = groundLevel - 20; // Lower the ball position
                 initialDistance = calculateDistance();
             }
         });
