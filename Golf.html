@@ -261,8 +261,8 @@
        const g = 9.81; // Gravity (m/s^2)
         const timeStep = 0.02; // Time increment per frame (s)  
         let ball = {
-            x: canvas.width - 150 - (100 * getScale()), // Align the ball position
-            y: canvas.height - 500, // Lower the ball position
+            x: hole.x - (100 * getScale()), // Align the ball position with the hole
+            y: canvas.height - 70, // Lower the ball position
             radius: .05 * getScale() * 100, // Make the ball smaller
             v0: 50, // Initial speed (m/s)
             angle: Math.PI / 4, // 45-degree launch angle
@@ -276,7 +276,7 @@
 
         const hole = {
             x: canvas.width - 150, // Align the hole horizontally with the ball
-            y: canvas.height - 20, // Lower the hole position
+            y: canvas.height - 130, // Lower the hole position
             radius: .07 * getScale() * 100, // Make the hole smaller
             flagHeight: 0.25 * getScale() * 100, // Make the flag smaller
             flagWidth: 0.05 * getScale() * 100 // Make the flag smaller
@@ -489,8 +489,8 @@
             ctx.font = '12px Arial';
             for(let i = 0; i <= 1000; i += 100 ){ // Update scale to 1000m
                 const x = hole.x - (i * getScale());
-                ctx.fillRect(x, canvas.height - 30, 2, 10); // Small line for indication
-                ctx.fillText(`${i}m`, x - 10, canvas.height - 15); // Fix the text position
+                ctx.fillRect(x, canvas.height - 50, 2, 10); // Lower the scale position
+                ctx.fillText(`${i}m`, x - 10, canvas.height - 35); // Lower the text position
             }
         }
 
@@ -533,7 +533,7 @@
             // Recalculate the positions of the ball and hole based on the new canvas size
             const scale = getScale();
             hole.x = canvas.width - 150 * scale; // Adjust hole position based on new scale
-            hole.y = 300; // Lower the hole position
+            hole.y = groundLevel - 20; // Lower the hole position
             
             ball.radius = 0.05 * scale * 100; // Make the ball smaller
             hole.radius = 0.07 * scale * 100; // Make the hole smaller
@@ -541,13 +541,15 @@
             hole.flagWidth = 0.05 * scale * 100; // Make the flag smaller
 
             if (!ball.isMoving && !ball.isDragging && !ball.hasLanded) {
-                initializeBallPosition(); // Initialize ball position
+                ball.x = hole.x - (100 * scale); // Align the ball position with the hole
+                ball.y = groundLevel - 20; // Lower the ball position
                 initialDistance = calculateDistance();
             }
         });
 
         // Initialize ball position on game start
-        initializeBallPosition();
+        ball.x = hole.x - (100 * getScale()); // Align the ball position with the hole
+        ball.y = groundLevel - 20; // Lower the ball position
     </script>
 </body>
 </html>
