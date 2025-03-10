@@ -296,6 +296,23 @@
             // No zooming logic needed
         }
 
+        function saveGameState() {
+            localStorage.setItem('ballPosition', JSON.stringify({ x: ball.x, y: ball.y }));
+            localStorage.setItem('holePosition', JSON.stringify({ x: hole.x, y: hole.y }));
+        }
+
+        function loadGameState() {
+            const savedBallPosition = JSON.parse(localStorage.getItem('ballPosition'));
+            const savedHolePosition = JSON.parse(localStorage.getItem('holePosition'));
+
+            if (savedBallPosition && savedHolePosition) {
+                ball.x = savedBallPosition.x;
+                ball.y = savedBallPosition.y;
+                hole.x = savedHolePosition.x;
+                hole.y = savedHolePosition.y;
+            }
+        }
+
         function resetBall() {
             ball.x = hole.x - (25 * getScale());
             ball.y = canvas.height - 50; // Lower the ball position
@@ -311,6 +328,7 @@
             timeTraveled = 0;
             document.getElementById('maxHeight').textContent = "0.0";
             document.getElementById('timeTraveled').textContent = "0.0";
+            saveGameState();
         }
 
         function showFinalDistance(distance, message) {
@@ -399,6 +417,7 @@
             }
             
             updateBallPosition();
+            saveGameState();
         }
 
         function calculateTrajectoryPoints(startX, startY, velocity, angle) {
@@ -522,10 +541,12 @@
                 initialDistance = distance;
                 document.getElementById('currentDistance').textContent = '0.0';
                 updateCameraZoom();
+                saveGameState();
             }
         });
 
         gameLoop();
+        loadGameState();
 
         window.addEventListener('resize', () =>{
             const currentWidth = canvas.width;
