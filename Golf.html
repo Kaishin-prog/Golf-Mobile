@@ -516,7 +516,7 @@
             document.getElementById('distanceValue').textContent = distance;
             if (!ball.isMoving && !ball.hasLanded) {
                 ball.x = hole.x - (distance * getScale());
-                ball.y = 20; // Lower the ball position
+                ball.y - 20; // Lower the ball position
                 initialDistance = distance;
                 document.getElementById('currentDistance').textContent = '0.0';
                 updateCameraZoom();
