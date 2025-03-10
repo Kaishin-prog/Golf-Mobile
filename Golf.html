@@ -279,7 +279,7 @@
         };
 
         const hole = {
-            x: canvas.width - 150,
+            x: ball.x + 50, // Align the hole horizontally with the ball
             y: ball.y, // Align the hole horizontally with the ball
             radius: .7 * getScale() * 100, // Make the hole smaller
             flagHeight: 2 * getScale() * 100, // Make the flag smaller
@@ -533,7 +533,7 @@
             const currentWidth = canvas.width;
             canvas.width = Math.max(window.innerWidth, currentWidth);
             canvas.height = window.innerHeight;
-            hole.x = canvas.width - 120;
+            hole.x = ball.x + 50; // Align the hole horizontally with the ball
             
             ball.radius = 0.05 * getScale() * 100; // Make the ball smaller
             hole.radius = .07 * getScale() * 100; // Make the hole smaller
