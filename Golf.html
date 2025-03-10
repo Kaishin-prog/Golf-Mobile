@@ -168,7 +168,7 @@
                 width: 100%;
             }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             body {
                 font-size: 12px;
             }
@@ -279,8 +279,8 @@
         };
 
         const hole = {
-            x: ball.x + 50, // Align the hole horizontally with the ball
-            y: ball.y, // Align the hole horizontally with the ball
+            x: canvas.width - 150, // Align the hole horizontally with the ball
+            y: canvas.height - 110, // Align the hole horizontally with the ball
             radius: .07 * getScale() * 100, // Make the hole smaller
             flagHeight: 0.25 * getScale() * 100, // Make the flag smaller
             flagWidth: 0.05 * getScale() * 100 // Make the flag smaller
