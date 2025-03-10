@@ -490,7 +490,7 @@
             for(let i = 0; i <= 1000; i += 100 ){ // Update scale to 1000m
                 const x = hole.x - (i * getScale());
                 ctx.fillRect(x, canvas.height - 10, 2, 40); // Small line for indication
-                ctx.fillText(`${i}m`, x - 10, canvas.height - -10); // Fix the text position
+                ctx.fillText(`${i}m`, x - 10, canvas.height - -5); // Fix the text position
             }
         }
 
