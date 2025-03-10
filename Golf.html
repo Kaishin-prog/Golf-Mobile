@@ -160,6 +160,10 @@
             canvas {
                 height: 80vh;
             }
+            /* Adjust hole scale */
+            .hole {
+                radius: .5 * getScale() * 100; /* Make the hole smaller */
+            }
         }
 
         @media (max-width: 480px) {
@@ -191,6 +195,10 @@
             }
             canvas {
                 height: 70vh;
+            }
+            /* Adjust hole scale */
+            .hole {
+                radius: .4 * getScale() * 100; /* Make the hole smaller */
             }
         }
     </style>
