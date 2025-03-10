@@ -261,7 +261,7 @@
        const g = 9.81; // Gravity (m/s^2)
         const timeStep = 0.02; // Time increment per frame (s)  
         let ball = {
-            x: canvas.width - 100 - (100 * getScale()),
+            x: canvas.width - 150 - (100 * getScale()), // Align the ball position
             y: canvas.height - 70, // Lower the ball position
             radius: .05 * getScale() * 100, // Make the ball smaller
             v0: 50, // Initial speed (m/s)
@@ -541,11 +541,13 @@
             hole.flagWidth = 0.05 * scale * 100; // Make the flag smaller
 
             if (!ball.isMoving && !ball.isDragging && !ball.hasLanded) {
-                ball.x = hole.x - (100 * scale);
-                ball.y = groundLevel - 20; // Lower the ball position
+                initializeBallPosition(); // Initialize ball position
                 initialDistance = calculateDistance();
             }
         });
+
+        // Initialize ball position on game start
+        initializeBallPosition();
     </script>
 </body>
 </html>
