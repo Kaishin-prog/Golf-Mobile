@@ -318,7 +318,7 @@
             document.getElementById('finalMessageTitle').textContent = message;
             // Update max height and time traveled inside the pop-up
             // The max height display is calculated similarly as in the distance display section
-            document.getElementById('finalMaxHeight').textContent = (canvas.height - maxHeight - 50).toFixed(1); // Adjust height calculation
+            document.getElementById('finalMaxHeight').textContent = (canvas.height - maxHeight - 20).toFixed(1); // Adjust height calculation
             document.getElementById('finalTimeTraveled').textContent = timeTraveled.toFixed(1);
             finalDistanceElement.style.display = 'block';
         }
@@ -385,7 +385,7 @@
 
                 if (ball.y < maxHeight) {
                     maxHeight = ball.y;
-                    document.getElementById('maxHeight').textContent = (canvas.height - maxHeight - 50).toFixed(1); // Adjust height calculation
+                    document.getElementById('maxHeight').textContent = (canvas.height - maxHeight - 20).toFixed(1); // Adjust height calculation
                 }
 
                 timeTraveled += 1/60;
