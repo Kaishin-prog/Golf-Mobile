@@ -133,7 +133,6 @@
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
-                height: auto; /* Ensure body height is auto to fit content */
             }
             .controls {
                 width: 90%;
@@ -170,7 +169,6 @@
         @media (max-width: 500px) {
             body {
                 font-size: 12px;
-                height: auto; /* Ensure body height is auto to fit content */
             }
             .controls {
                 width: 100%;
@@ -296,26 +294,9 @@
             // No zooming logic needed
         }
 
-        function saveGameState() {
-            localStorage.setItem('ballPosition', JSON.stringify({ x: ball.x, y: ball.y }));
-            localStorage.setItem('holePosition', JSON.stringify({ x: hole.x, y: hole.y }));
-        }
-
-        function loadGameState() {
-            const savedBallPosition = JSON.parse(localStorage.getItem('ballPosition'));
-            const savedHolePosition = JSON.parse(localStorage.getItem('holePosition'));
-
-            if (savedBallPosition && savedHolePosition) {
-                ball.x = savedBallPosition.x;
-                ball.y = savedBallPosition.y;
-                hole.x = savedHolePosition.x;
-                hole.y = savedHolePosition.y;
-            }
-        }
-
         function resetBall() {
             ball.x = hole.x - (25 * getScale());
-            ball.y = canvas.height - 50; // Lower the ball position
+            ball.y = groundLevel; // Fix the ball position
             ball.vx = 0;
             ball.vy = 0;
             ball.isMoving = false;
@@ -328,7 +309,6 @@
             timeTraveled = 0;
             document.getElementById('maxHeight').textContent = "0.0";
             document.getElementById('timeTraveled').textContent = "0.0";
-            saveGameState();
         }
 
         function showFinalDistance(distance, message) {
@@ -417,7 +397,6 @@
             }
             
             updateBallPosition();
-            saveGameState();
         }
 
         function calculateTrajectoryPoints(startX, startY, velocity, angle) {
@@ -511,7 +490,7 @@
             for(let i = 0; i <= 1000; i += 100 ){ // Update scale to 1000m
                 const x = hole.x - (i * getScale());
                 ctx.fillRect(x, canvas.height - 30, 2, 10); // Small line for indication
-                ctx.fillText(`${i}m`, x - 10, canvas.height - 5); // Lower the text
+                ctx.fillText(`${i}m`, x - 10, canvas.height - 15); // Fix the text position
             }
         }
 
@@ -537,31 +516,33 @@
             document.getElementById('distanceValue').textContent = distance;
             if (!ball.isMoving && !ball.hasLanded) {
                 ball.x = hole.x - (distance * getScale());
-                ball.y = canvas.height - 50; // Lower the ball position
+                ball.y = groundLevel; // Fix the ball position
                 initialDistance = distance;
                 document.getElementById('currentDistance').textContent = '0.0';
                 updateCameraZoom();
-                saveGameState();
             }
         });
 
         gameLoop();
-        loadGameState();
 
-        window.addEventListener('resize', () =>{
+        window.addEventListener('resize', () => {
             const currentWidth = canvas.width;
             canvas.width = Math.max(window.innerWidth, currentWidth);
             canvas.height = window.innerHeight;
-            hole.x = ball.x + 50; // Align the hole horizontally with the ball
             
-            ball.radius = 0.05 * getScale() * 100; // Make the ball smaller
-            hole.radius = .07 * getScale() * 100; // Make the hole smaller
-            hole.flagHeight = 0.25 * getScale() * 100; // Make the flag smaller
-            hole.flagWidth = 0.05 * getScale() * 100; // Make the flag smaller
+            // Recalculate the positions of the ball and hole based on the new canvas size
+            const scale = getScale();
+            hole.x = canvas.width - 150 * scale; // Adjust hole position based on new scale
+            hole.y = groundLevel; // Keep the hole at ground level
+            
+            ball.radius = 0.05 * scale * 100; // Make the ball smaller
+            hole.radius = 0.07 * scale * 100; // Make the hole smaller
+            hole.flagHeight = 0.25 * scale * 100; // Make the flag smaller
+            hole.flagWidth = 0.05 * scale * 100; // Make the flag smaller
 
             if (!ball.isMoving && !ball.isDragging && !ball.hasLanded) {
-                ball.x = hole.x - (100*getScale());
-                ball.y = canvas.height - 50; // Lower the ball position
+                ball.x = hole.x - (100 * scale);
+                ball.y = groundLevel; // Fix the ball position
                 initialDistance = calculateDistance();
             }
         });
