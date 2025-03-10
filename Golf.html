@@ -164,11 +164,79 @@
             .hole {
                 radius: .5 * getScale() * 100; /* Make the hole smaller */
             }
+            /* Add game logic for horizontal scaling */
+            canvas {
+                width: 100%;
+            }
+            .controls {
+                width: 100%;
+                left: 0;
+                top: 5px;
+                padding: 5px;
+            }
+            .distance-display {
+                top: 5px;
+                right: 5px;
+                font-size: 8px;
+                padding: 5px;
+            }
+            .final-distance, .congrats-message, .try-again-message {
+                font-size: 8px;
+                padding: 5px;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -40%);
+            }
+            .reset-btn, .back-button {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+            canvas {
+                height: 70vh;
+            }
+            /* Adjust hole scale */
+            .hole {
+                radius: .4 * getScale() * 100; /* Make the hole smaller */
+            }
         }
 
         @media (max-width: 480px) {
             body {
                 font-size: 12px;
+            }
+            .controls {
+                width: 100%;
+                left: 0;
+                top: 5px;
+                padding: 5px;
+            }
+            .distance-display {
+                top: 5px;
+                right: 5px;
+                font-size: 8px;
+                padding: 5px;
+            }
+            .final-distance, .congrats-message, .try-again-message {
+                font-size: 8px;
+                padding: 5px;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -40%);
+            }
+            .reset-btn, .back-button {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+            canvas {
+                height: 70vh;
+            }
+            /* Adjust hole scale */
+            .hole {
+                radius: .4 * getScale() * 100; /* Make the hole smaller */
+            }
+            /* Add game logic for horizontal scaling */
+            canvas {
+                width: 100%;
             }
             .controls {
                 width: 100%;
