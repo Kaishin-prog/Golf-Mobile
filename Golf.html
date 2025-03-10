@@ -157,6 +157,9 @@
                 font-size: 12px;
                 padding: 8px 16px;
             }
+            canvas {
+                height: 80vh;
+            }
         }
 
         @media (max-width: 480px) {
@@ -185,6 +188,9 @@
             .reset-btn, .back-button {
                 font-size: 10px;
                 padding: 6px 12px;
+            }
+            canvas {
+                height: 70vh;
             }
         }
     </style>
@@ -239,7 +245,7 @@
         const minWidth = baseWidth * 100; 
         const maxWidth = baseWidth * 1200; // Update maxWidth to 1000m
         
-        const groundLevel = canvas.height - 150;
+        const groundLevel = canvas.height - 100; // Lower the ground level
 
         let score = 0;
        // Constants
@@ -247,7 +253,7 @@
         const timeStep = 0.02; // Time increment per frame (s)  
         let ball = {
             x: canvas.width - 100 - (100 * getScale()),
-            y: canvas.height - 100,
+            y: canvas.height - 50, // Lower the ball position
             radius: .5 * getScale() * 100, // Make the ball smaller
             v0: 50, // Initial speed (m/s)
             angle: Math.PI / 4, // 45-degree launch angle
@@ -261,7 +267,7 @@
 
         const hole = {
             x: canvas.width - 150,
-            y: canvas.height = ball.y + 56 ,
+            y: ball.y, // Align the hole horizontally with the ball
             radius: .7 * getScale() * 100, // Make the hole smaller
             flagHeight: 2 * getScale() * 100, // Make the flag smaller
             flagWidth: 0.5 * getScale() * 100 // Make the flag smaller
@@ -281,7 +287,7 @@
 
         function resetBall() {
             ball.x = hole.x - (25 * getScale());
-            ball.y = canvas.height  - 175;
+            ball.y = canvas.height - 50; // Lower the ball position
             ball.vx = 0;
             ball.vy = 0;
             ball.isMoving = false;
@@ -303,7 +309,7 @@
             document.getElementById('finalMessageTitle').textContent = message;
             // Update max height and time traveled inside the pop-up
             // The max height display is calculated similarly as in the distance display section
-            document.getElementById('finalMaxHeight').textContent = (canvas.height - maxHeight - 180).toFixed(1);
+            document.getElementById('finalMaxHeight').textContent = (canvas.height - maxHeight - 50).toFixed(1); // Adjust height calculation
             document.getElementById('finalTimeTraveled').textContent = timeTraveled.toFixed(1);
             finalDistanceElement.style.display = 'block';
         }
@@ -339,8 +345,8 @@
                 
                 updateCameraZoom();
                 
-                if (ball.y > canvas.height - 180) {
-                    ball.y = canvas.height - 180;
+                if (ball.y > canvas.height - 50) { // Adjust ground level
+                    ball.y = canvas.height - 50; // Adjust ground level
                     ball.vy = 0;
                     ball.vx = 0;
                     ball.isMoving = false;
@@ -370,7 +376,7 @@
 
                 if (ball.y < maxHeight) {
                     maxHeight = ball.y;
-                    document.getElementById('maxHeight').textContent = (canvas.height - maxHeight - 180).toFixed(1);
+                    document.getElementById('maxHeight').textContent = (canvas.height - maxHeight - 50).toFixed(1); // Adjust height calculation
                 }
 
                 timeTraveled += 1/60;
@@ -428,7 +434,7 @@
         }
 
         function calculateDistance() {
-            if (Math.abs(canvas.height - ball.y - 50) < 1) {
+            if (Math.abs(canvas.height - ball.y - 50) < 1) { // Adjust ground level
                 const distance = (ball.radius - hole.radius) / getScale();
                 return distance; // Will be negative if ball is right of hole
             }
@@ -501,7 +507,7 @@
             document.getElementById('distanceValue').textContent = distance;
             if (!ball.isMoving && !ball.hasLanded) {
                 ball.x = hole.x - (distance * getScale());
-                ball.y = canvas.height - 180;
+                ball.y = canvas.height - 50; // Lower the ball position
                 initialDistance = distance;
                 document.getElementById('currentDistance').textContent = '0.0';
                 updateCameraZoom();
@@ -523,7 +529,7 @@
 
             if (!ball.isMoving && !ball.isDragging && !ball.hasLanded) {
                 ball.x = hole.x - (100*getScale());
-                ball.y = canvas.height - 115;
+                ball.y = canvas.height - 50; // Lower the ball position
                 initialDistance = calculateDistance();
             }
         });
